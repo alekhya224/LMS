@@ -1,0 +1,27 @@
+﻿@model EmployeeLeaveManagementApp.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>You are logged in....</h2>
+
+<script type="text/javascript">
+                $(document).ready(function () {
+                    debugger;
+                    //var name = $('.Login_name').text();
+                    var userName = '@Model.UserName'.toString();
+                    $(".Login_Name").text(userName).show();
+                 
+                });
+                //$(function () {
+                //    var modelbox = function () {
+                //        $("#modalbox").modal("show");
+                //    };
+                //    $("#btnaddperson").on('click', modelbox);
+                //});
+
+
+
+</script>
