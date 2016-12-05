@@ -16,6 +16,9 @@ using Microsoft.Owin.Security.OAuth;
 using EmployeeLeaveManagementWebAPI.Models;
 using EmployeeLeaveManagementWebAPI.Providers;
 using EmployeeLeaveManagementWebAPI.Results;
+using Service;
+using Domain;
+
 
 namespace EmployeeLeaveManagementWebAPI.Controllers
 {
@@ -25,6 +28,7 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private UserManagement userManager = new UserManagement();
 
         public AccountController()
         {
@@ -125,7 +129,7 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -258,9 +262,9 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -321,8 +325,15 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
         //GET api/Account/Login?username=abcd&password=234234#434ndfh@323
         [AllowAnonymous]
         [HttpGet]
-        public LoginModel Login(string userName,string password)
+        public UserAccountModel Login(string userName, string password)
         {
+            var userData = userManager.GetUser(userName, password);
+            if (null != userData)
+            { return userData; }
+            else
+            {
+                return null;
+            }
 
         }
 
@@ -376,7 +387,7 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

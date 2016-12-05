@@ -4,12 +4,13 @@ using System.Linq;
 using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Repositories.Interfaces;
 
 namespace DAL.Repositories
 {
- public class UserRepository
+ public class UserRepository:IUser
     {
-        public bool GetUser(string emailId, string password)
+        public UserAccount GetUser(string emailId, string password)
         {
             using (var ctx = new LeaveManagementSystemEntities())
             {
@@ -18,13 +19,13 @@ namespace DAL.Repositories
                                 select c).SingleOrDefault();
                 if (userData != null)
                 {
-                    var EmpData = (from c in ctx.EmployeeDetails
-                                   where c.Id == userData.RefEmployeeId
-                                   select c).SingleOrDefault();
+                    return userData;
                 }
                 else
-                    return false;
+                    return null;
             }
         }
+
+
     }
 }
