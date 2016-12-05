@@ -25,7 +25,5 @@ namespace DAL.Repositories
                     return null;
             }
         }
-
-
     }
 }

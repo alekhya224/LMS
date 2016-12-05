@@ -329,12 +329,13 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
         {
             var userData = userManager.GetUser(userName, password);
             if (null != userData)
-            { return userData; }
+            {
+                return userData;
+            }
             else
             {
                 return null;
             }
-
         }
 
         // POST api/Account/Register
