@@ -35,7 +35,7 @@ namespace LMS_WebAPP_ServiceHelpers
         ////}
 
         private const string URL = "http://localhost:64476/api/Account/Login";
-        private string urlParameters = "?userName=anualoor&password=Temp@123";
+        private string urlParameters = "";
 
         public async Task<UserAccount> GetUserAsync(string userName,string password)
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeLeaveManagementApp.Controllers
 {
-    public class LeaveTransectionController : Controller
+    public class LeaveTransactionController : Controller
     {
         static HttpClient client = new HttpClient();
         

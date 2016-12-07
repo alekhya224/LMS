@@ -8,15 +8,13 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <script async="" src="//www.google-analytics.com/analytics.js"></script>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link href="~/dist/css/AdminLTE.min.css" rel="stylesheet" />
-    <link href="~/plugins/datepicker/datepicker3.css" rel="stylesheet" />
-    <link href="~/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
 
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
@@ -28,21 +26,17 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition skin-black sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
     <script src="~/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
-    @*<script src="plugins/sparkline/jquery.sparkline.min.js"></script>*@
+
     <!-- SlimScroll -->
     <script src="~/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="~/plugins/datepicker/bootstrap-datepicker.js"></script>
     <!-- FastClick -->
-    @*<script src="~/plugins/fastclick/fastclick.js"></script>
-    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>*@
-    <script src="~/plugins/chartjs/Chart.min.js"></script>
+    <script src="~/plugins/fastclick/fastclick.js"></script>
+
     <!-- AdminLTE App -->
     <script src="~/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -55,8 +49,8 @@
 
                 <span class="logo-mini">LMS </span>
                 <!-- logo for regular state and mobile devices -->
-               
-                <span class="logo-lg"><img src="~/dist/img/infrrd-logo-main.png"  style="width:196px;height:52px;" /></span>
+
+                <span class="logo-lg"><img src="~/dist/img/infrrd-logo-main.png" style="width:196px;height:52px;" /></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -96,17 +90,18 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs Login_Name"  >Alexander</span>
+                                <span class="hidden-xs Login_Name">Alexander</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                    <p >
+                                    <p>
                                         <span class="Login_Name">
-                                            Alexander </span><br /> <span id="Role">Web Developer</span>
-                                            <small>Employee since <span id="DOJ"></span></small>
-</p>
+                                            Alexander
+                                        </span><br /> Web Developer
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
                                 </li>
                                 <!-- Menu Body -->
                                 <!-- Menu Footer-->
@@ -137,7 +132,7 @@
                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p class="Login_Name"  >Alexander Pierce</p>
+                        <p class="Login_Name">Alexander Pierce</p>
                     </div>
                 </div>
 
@@ -145,9 +140,9 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
 
-                    <li class="treeview" id="DashB">
+                    <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-dashboard" ></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
 
                         </a>
 
@@ -159,8 +154,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="../widgets.html">
+                        <a href="@Url.Action("ApplyLeave", "ApplyLeave")">
                             <i class="fa fa-th"></i> <span>Apply Leave</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("LeaveTransection", "LeaveTransection")">
+                            <i class="fa fa-th"></i> <span>Leave Transaction</span>
 
                         </a>
                     </li>
@@ -205,7 +206,7 @@
     <!-- ./wrapper -->
     <!-- jQuery 2.2.3 -->
 
-   
+
 </body>
 </html>
 <script>
