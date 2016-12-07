@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace DAL.Repositories.Interfaces
 {
  public interface IUser
     {
-         UserAccount GetUser(string emailId, string password);
+        EmployeeCommon GetUser(string emailId, string password);
     }
 }
