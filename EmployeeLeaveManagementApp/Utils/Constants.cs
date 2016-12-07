@@ -9,5 +9,6 @@ namespace Utils
     public class Constants
     {
         public const string SALT = "N#ithN";
+        public const string SESSION_OBJ_USER = "user";
     }
 }

@@ -19,7 +19,9 @@ namespace DAL
         public string ContactDetails { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public int RefEmpId { get; set; }
     
         public virtual MasterDataValue MasterDataValue { get; set; }
+        public virtual EmployeeDetail EmployeeDetail { get; set; }
     }
 }

@@ -2,3 +2,10 @@ C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManage
 C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\bin\Debug\Service.pdb
 C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\obj\Debug\Service.dll
 C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\obj\Debug\Service.pdb
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\bin\Debug\Domain.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\bin\Debug\Newtonsoft.Json.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\bin\Debug\Domain.pdb
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\bin\Debug\Newtonsoft.Json.xml
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache

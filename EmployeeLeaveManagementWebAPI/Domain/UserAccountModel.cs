@@ -15,5 +15,13 @@ namespace Domain
         public int RefEmployeeId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string ProjectName { get; set; }
+        public String RoleName { get; set; }
+        public int? TotalLeaveCount { get; set; }
+        public int TotalCountTaken { get; set; }
+        public string ManagerName { get; set; }
+        public System.DateTime DateOfJoining { get; set; }
+
+
     }
 }

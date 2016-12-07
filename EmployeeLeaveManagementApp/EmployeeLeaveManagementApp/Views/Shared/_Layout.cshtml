@@ -8,13 +8,15 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
+    <script async="" src="//www.google-analytics.com/analytics.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link href="~/dist/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
 
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
@@ -26,17 +28,21 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
     <!-- Site wrapper -->
     <script src="~/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
-
+    @*<script src="plugins/sparkline/jquery.sparkline.min.js"></script>*@
     <!-- SlimScroll -->
     <script src="~/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/plugins/datepicker/bootstrap-datepicker.js"></script>
     <!-- FastClick -->
-    <script src="~/plugins/fastclick/fastclick.js"></script>
-
+    @*<script src="~/plugins/fastclick/fastclick.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>*@
+    <script src="~/plugins/chartjs/Chart.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -98,8 +104,8 @@
                                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                     <p >
                                         <span class="Login_Name">
-                                            Alexander </span><br /> Web Developer
-                                            <small>Member since Nov. 2012</small>
+                                            Alexander </span><br /> <span id="Role">Web Developer</span>
+                                            <small>Employee since <span id="DOJ"></span></small>
 </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -139,9 +145,9 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
 
-                    <li class="treeview">
+                    <li class="treeview" id="DashB">
                         <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard" ></i> <span>Dashboard</span>
 
                         </a>
 

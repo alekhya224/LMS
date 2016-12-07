@@ -3,10 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Domain;
+
 
 namespace Service
 {
     public class UserManagement
     {
+        static HttpClient client = new HttpClient();
+        //static async Task<UserAccount> GetProductAsync(string path)
+        //{
+        //    UserAccount user = null;
+        //    HttpResponseMessage response = await client.GetAsync(path);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        user = await response.Content.ReadAsAsync<UserAccount>();
+        //    }
+        //    return user;
+        //}
+
+        //static async Task RunAsync()
+        //{
+        //    New code:
+        //    client.BaseAddress = new Uri("http://localhost:55268/");
+        //    client.DefaultRequestHeaders.Accept.Clear();
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //    Console.ReadLine();
+        //}
+
+        private const string URL = "http://localhost:64476/api/Account/Login";
+        private string urlParameters = "?userName=anualoor&password=Temp@123";
+
+        public async Task<UserAccount> GetUserAsync()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            HttpResponseMessage response = await client.GetAsync(urlParameters);  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                var dataObjects = await response.Content.ReadAsAsync<UserAccount>();
+                return dataObjects;
+               
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                return null;
+            }
+        }
     }
 }
+

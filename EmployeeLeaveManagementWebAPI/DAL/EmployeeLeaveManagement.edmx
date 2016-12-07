@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LeaveManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LeaveManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EmployeeContactDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,6 +14,7 @@
           <Property Name="ContactDetails" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="RefEmpId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeeDetails">
           <Key>
@@ -114,6 +115,18 @@
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
           <Property Name="RefStatus" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_EmpDetails_EmployeeContactDetails">
+          <End Role="EmployeeDetails" Type="Self.EmployeeDetails" Multiplicity="1" />
+          <End Role="EmployeeContactDetails" Type="Self.EmployeeContactDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeContactDetails">
+              <PropertyRef Name="RefEmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EmployeeDetails_EmployeeLeaveTransaction">
           <End Role="EmployeeDetails" Type="Self.EmployeeDetails" Multiplicity="1" />
           <End Role="EmployeeLeaveTransaction" Type="Self.EmployeeLeaveTransaction" Multiplicity="*" />
@@ -281,6 +294,10 @@
           <EntitySet Name="MasterDataValue" EntityType="Self.MasterDataValue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workflow" EntityType="Self.Workflow" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmpDetails_EmployeeContactDetails" Association="Self.FK_EmpDetails_EmployeeContactDetails">
+            <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
+            <End Role="EmployeeContactDetails" EntitySet="EmployeeContactDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_EmployeeDetails_EmployeeLeaveTransaction" Association="Self.FK_EmployeeDetails_EmployeeLeaveTransaction">
             <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
             <End Role="EmployeeLeaveTransaction" EntitySet="EmployeeLeaveTransaction" />
@@ -334,8 +351,7 @@
             <End Role="Workflow" EntitySet="Workflow" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LeaveManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -349,6 +365,8 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
           <NavigationProperty Name="MasterDataValue" Relationship="Self.FK_MasterDataValue_EmployeeContactDetails" FromRole="EmployeeContactDetails" ToRole="MasterDataValue" />
+          <Property Name="RefEmpId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmployeeDetail" Relationship="LeaveManagementSystemModel.FK_EmpDetails_EmployeeContactDetails" FromRole="EmployeeContactDetail" ToRole="EmployeeDetail" />
         </EntityType>
         <EntityType Name="EmployeeDetail">
           <Key>
@@ -367,6 +385,7 @@
           <NavigationProperty Name="UserAccounts" Relationship="Self.FK_EmployeeDetails_UserAccount" FromRole="EmployeeDetails" ToRole="UserAccount" />
           <NavigationProperty Name="Workflows" Relationship="Self.FK_EmployeeDetailsId_Workflow" FromRole="EmployeeDetails" ToRole="Workflow" />
           <NavigationProperty Name="MasterDataValue" Relationship="Self.FK_MasterDataValue_EmployeeDetails" FromRole="EmployeeDetails" ToRole="MasterDataValue" />
+          <NavigationProperty Name="EmployeeContactDetails" Relationship="LeaveManagementSystemModel.FK_EmpDetails_EmployeeContactDetails" FromRole="EmployeeDetail" ToRole="EmployeeContactDetail" />
         </EntityType>
         <EntityType Name="EmployeeLeaveTransaction">
           <Key>
@@ -693,7 +712,23 @@
             <End Role="MasterDataValue" EntitySet="MasterDataValues" />
             <End Role="Workflow" EntitySet="Workflows" />
           </AssociationSet>
+          <AssociationSet Name="FK_EmpDetails_EmployeeContactDetails" Association="LeaveManagementSystemModel.FK_EmpDetails_EmployeeContactDetails">
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+            <End Role="EmployeeContactDetail" EntitySet="EmployeeContactDetails" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_EmpDetails_EmployeeContactDetails">
+          <End Type="LeaveManagementSystemModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="1" />
+          <End Type="LeaveManagementSystemModel.EmployeeContactDetail" Role="EmployeeContactDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeContactDetail">
+              <PropertyRef Name="RefEmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -703,6 +738,7 @@
           <EntitySetMapping Name="EmployeeContactDetails">
             <EntityTypeMapping TypeName="LeaveManagementSystemModel.EmployeeContactDetail">
               <MappingFragment StoreEntitySet="EmployeeContactDetails">
+                <ScalarProperty Name="RefEmpId" ColumnName="RefEmpId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RefContactType" ColumnName="RefContactType" />
                 <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />

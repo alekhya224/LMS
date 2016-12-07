@@ -2,3 +2,4 @@ C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManage
 C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Domain\bin\Debug\Domain.pdb
 C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Domain\obj\Debug\Domain.dll
 C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Domain\obj\Debug\Domain.pdb
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementApp\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache

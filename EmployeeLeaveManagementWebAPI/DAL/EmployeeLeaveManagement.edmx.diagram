@@ -7,8 +7,8 @@
       <Diagram DiagramId="d664e9d25f6f4fec8659c02d76a8bf82" Name="Diagram1">
         <EntityTypeShape EntityType="LeaveManagementSystemModel.EmployeeContactDetail" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.EmployeeDetail" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="LeaveManagementSystemModel.EmployeeLeaveTransaction" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LeaveManagementSystemModel.EmployeeProjectDetail" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveManagementSystemModel.EmployeeLeaveTransaction" Width="1.5" PointX="10.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeaveManagementSystemModel.EmployeeProjectDetail" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.Holiday" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.LeaveMaster" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.MasterDataType" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
@@ -28,6 +28,7 @@
         <AssociationConnector Association="LeaveManagementSystemModel.FK_MasterDataValue_LeaveMaster" ManuallyRouted="false" />
         <AssociationConnector Association="LeaveManagementSystemModel.FK_MasterDataType_MasterDataValue" ManuallyRouted="false" />
         <AssociationConnector Association="LeaveManagementSystemModel.FK_MasterDataValueStatus_Workflow" ManuallyRouted="false" />
+        <AssociationConnector Association="LeaveManagementSystemModel.FK_EmpDetails_EmployeeContactDetails" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,5 +22,28 @@ namespace EmployeeLeaveManagementApp.Models
         [StringLength(256, MinimumLength = 5, ErrorMessage = "UserName length must be within 256")]
         public string UserName { get; set; }
         public bool RememberMe { get; set; }
+
+        public string EmpName { get; set; }
+        public int EmpExperience { get; set; }
+        public string ManagerName { get; set; }
+        public string Projectname { get; set; }
+        public String RoleName { get; set; }
+        public int TotalLeaveCount { get; set; }
+        public int TotalLeft { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime DateOfJoining { get; set; }
+        public int TotalTaken { get; set; }
+        public string FormattedDate
+        {
+            get
+            {
+                if (DateOfJoining != null)
+                    return Convert.ToDateTime(DateOfJoining).ToString("dd MMM yyyy");
+                else
+                {
+                    return "";
+                }
+            }
+        }
     }
 }

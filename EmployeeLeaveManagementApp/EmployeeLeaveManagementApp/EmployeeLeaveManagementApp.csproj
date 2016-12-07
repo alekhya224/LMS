@@ -1151,8 +1151,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1166,9 +1166,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\Domain\LMS_WebAPP_Domain.csproj">
+      <Project>{2c46a917-dfd8-4209-a858-7ced1fca55ca}</Project>
+      <Name>LMS_WebAPP_Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\LMS_WebAPP_ServiceHelpers.csproj">
+      <Project>{4024ed02-9fa5-444d-b90d-3a9bf0772c57}</Project>
+      <Name>LMS_WebAPP_ServiceHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\LMS_WebAPP_Utils.csproj">
       <Project>{388e3f39-1cb3-4bb0-bca0-45f8560ca768}</Project>
-      <Name>Utils</Name>
+      <Name>LMS_WebAPP_Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

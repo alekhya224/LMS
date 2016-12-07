@@ -21,6 +21,7 @@ namespace DAL
             this.EmployeeProjectDetails = new HashSet<EmployeeProjectDetail>();
             this.UserAccounts = new HashSet<UserAccount>();
             this.Workflows = new HashSet<Workflow>();
+            this.EmployeeContactDetails = new HashSet<EmployeeContactDetail>();
         }
     
         public int Id { get; set; }
@@ -41,5 +42,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Workflow> Workflows { get; set; }
         public virtual MasterDataValue MasterDataValue { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeContactDetail> EmployeeContactDetails { get; set; }
     }
 }

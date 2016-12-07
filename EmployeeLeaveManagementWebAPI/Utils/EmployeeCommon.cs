@@ -21,7 +21,7 @@ namespace Utils
         public string Password { get; set; }
         public Nullable<System.DateTime> Lastlogin { get; set; }
         public string ProjectName { get; set; }
-        public int TotalLeaveCount { get; set; }
-        public int TotalCountRemaining { get; set; }
+        public int? TotalLeaveCount { get; set; }
+        public int TotalCountTaken { get; set; }
     }
 }

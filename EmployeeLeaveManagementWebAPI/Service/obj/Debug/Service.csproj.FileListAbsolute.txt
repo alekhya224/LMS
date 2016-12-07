@@ -1,0 +1,13 @@
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\Service.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\Service.pdb
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\DAL.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\Domain.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\EntityFramework.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\DAL.pdb
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\Domain.pdb
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\EntityFramework.xml
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\obj\Debug\Service.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\obj\Debug\Service.pdb
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\Utils.dll
+C:\Users\E6430\Documents\Visual Studio 2015\Projects\LMS\LMS\EmployeeLeaveManagementWebAPI\Service\bin\Debug\Utils.pdb
