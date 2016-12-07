@@ -32,10 +32,10 @@ namespace EmployeeLeaveManagementApp.Controllers
         //{
         //    return View();
         //}
-        ////public ActionResult Login()
-        ////{
-        ////    return View();
-        ////}
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
         [HttpPost]
         public async Task<ActionResult> Login(Models.LoginModel model)
         {
@@ -44,11 +44,11 @@ namespace EmployeeLeaveManagementApp.Controllers
                UserManagement user = new UserManagement();
                 if (null == Session[Constants.SESSION_OBJ_USER])
                 {
-                    var data = await user.GetUserAsync();
+                    var data = await user.GetUserAsync(model.UserName,model.Password);
 
                     if (null != data)
                     {
-                       
+
                         //#region Cookie setup with remember me
                         //if (model.RememberMe) //adding cookies for the user
                         //{
@@ -67,11 +67,11 @@ namespace EmployeeLeaveManagementApp.Controllers
                         //#endregion
 
                         //var encryptedPassword = CommonMethods.EncryptDataForLogins(model.UserName, model.Password);
-                        ////Get  userdata authenticated against web api
-                        ////if (user.GetUser(model.UserName, encryptedPassword))
-                        ////{
+                        //Get  userdata authenticated against web api
+                        //if (user.GetUser(model.UserName, encryptedPassword))
+                        //{
 
-                        ////}
+                        //}
                         model.EmpName = data.UserName;
                         model.Projectname = data.ProjectName;
                         model.ManagerName = data.ManagerName;
