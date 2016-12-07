@@ -22,7 +22,7 @@ namespace LMS_WebAPI_ServiceHelpers
             VerifiedUser.Password = userData.Password;
             VerifiedUser.Lastlogin = userData.Lastlogin;
             VerifiedUser.CreatedDate = userData.CreatedDate;
-            VerifiedUser.RoleName = userData.;
+            VerifiedUser.RoleName = userData.RoleName;
             VerifiedUser.TotalCountTaken = userData.TotalCountTaken;
             VerifiedUser.TotalLeaveCount = userData.TotalLeaveCount;
             VerifiedUser.ManagerName = userData.ManagerName;

@@ -13,33 +13,34 @@ namespace LMS_WebAPP_ServiceHelpers
     public class UserManagement
     {
         static HttpClient client = new HttpClient();
-        //static async Task<UserAccount> GetProductAsync(string path)
-        //{
-        //    UserAccount user = null;
-        //    HttpResponseMessage response = await client.GetAsync(path);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        user = await response.Content.ReadAsAsync<UserAccount>();
-        //    }
-        //    return user;
-        //}
+        ////static async Task<UserAccount> GetProductAsync(string path)
+        ////{
+        ////    UserAccount user = null;
+        ////    HttpResponseMessage response = await client.GetAsync(path);
+        ////    if (response.IsSuccessStatusCode)
+        ////    {
+        ////        user = await response.Content.ReadAsAsync<UserAccount>();
+        ////    }
+        ////    return user;
+        ////}
 
-        //static async Task RunAsync()
-        //{
-        //    New code:
-        //    client.BaseAddress = new Uri("http://localhost:55268/");
-        //    client.DefaultRequestHeaders.Accept.Clear();
-        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        ////static async Task RunAsync()
+        ////{
+        ////    New code:
+        ////    client.BaseAddress = new Uri("http://localhost:55268/");
+        ////    client.DefaultRequestHeaders.Accept.Clear();
+        ////    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    Console.ReadLine();
-        //}
+        ////    Console.ReadLine();
+        ////}
 
         private const string URL = "http://localhost:64476/api/Account/Login";
         private string urlParameters = "?userName=anualoor&password=Temp@123";
 
-        public async Task<UserAccount> GetUserAsync()
+        public async Task<UserAccount> GetUserAsync(string userName,string password)
         {
             HttpClient client = new HttpClient();
+            urlParameters = "?userName=" + userName + "&password=" + password;
             client.BaseAddress = new Uri(URL);
 
             // Add an Accept header for JSON format.
