@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
- public interface IUser
+    public interface IEmployeeLeaveTransaction
     {
-         UserAccount GetUser(string emailId, string password);
+       List<EmployeeLeaveTransaction> GetEmployeeLeaveTransaction();
     }
 }

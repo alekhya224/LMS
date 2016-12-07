@@ -16,8 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using EmployeeLeaveManagementWebAPI.Models;
 using EmployeeLeaveManagementWebAPI.Providers;
 using EmployeeLeaveManagementWebAPI.Results;
-using Service;
-using Domain;
+using LMS_WebAPI_ServiceHelpers;
+using LMS_WebAPI_Domain;
 
 
 namespace EmployeeLeaveManagementWebAPI.Controllers

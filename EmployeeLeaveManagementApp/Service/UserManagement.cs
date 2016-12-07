@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Domain;
+using LMS_WebAPP_Domain;
 
 
-namespace Service
+namespace LMS_WebAPP_ServiceHelpers
 {
     public class UserManagement
     {

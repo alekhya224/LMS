@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "ApplyLeave";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<Domain.LeaveTransaction>
+@{
+    ViewBag.Title = "LeaveTransection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Leave Transaction</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Main content -->
+    <h2>Apply Leave</h2>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+                                    <th>Submitted Date</th>
+                                    <th>Status</th>
+                                    <th>Number of working Days</th>
+                                    <th>Leave Type</th>
+                                </tr>
+                            </thead>
+                            @foreach (Domain.LeaveTransaction m in Model)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>@m.FromDate.Date.ToString("dd/MM/yyyy")</td>
+                                        <td>@m.ToDate.Date.ToString("dd/MM/yyyy")</td>
+                                        <td>@m.CreatedDate.Date.ToString("dd/MM/yyyy")</td>
+                                        <td>@m.RefStatus</td>
+                                        <td>@m.NumberOfWorkingDays</td>
+                                        <td>@m.RefLeaveType</td>
+                                    </tr>
+                                </tbody>
+
+                            }
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                        <button type="button" id="btnaddleave" class="btn btn-block btn-primary" onclick="addleave()" >Add Leave</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <div id="AddLeave"></div>
+    <div id="dialog" style="display: none" align="center">
+        <section class="content">
+            <div class="example-modal">
+                <div class="modal modal-primary">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title">Add Leave</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>One fine body&hellip;</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline">Save</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- /.example-modal -->
+
+        </section>
+    </div>
+    <!-- /.content -->
+    <!-- ./wrapper -->
+    <!-- jQuery 2.2.3 -->
+    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+ $(document).ready(function() {
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+  $('#btnaddleave').on('click', function () {
+      $("#AddLeave").dialog({
+          autoOpen: true,
+          position: { my: "center", at: "top+350", of: window },
+          width: 1000,
+          resizable: false,
+          title: 'Add Leave',
+          modal: true,
+          open: function () {
+              $(this).load('@Url.Action("AddLeave", "AddLeave")');
+          }
+      });
+
+  });
+ });
+    </script>
+</body>
+</html>
+
+
+
+
+

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace LMS_WebAPP_Domain
 {
     public class UserAccount
     {

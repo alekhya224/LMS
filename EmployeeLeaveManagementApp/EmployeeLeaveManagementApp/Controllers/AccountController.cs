@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Service;
+using LMS_WebAPP_ServiceHelpers;
 using Utils;
-using Domain;
+using LMS_WebAPP_Domain;
 using System.Threading.Tasks;
 
 namespace EmployeeLeaveManagementApp.Controllers
