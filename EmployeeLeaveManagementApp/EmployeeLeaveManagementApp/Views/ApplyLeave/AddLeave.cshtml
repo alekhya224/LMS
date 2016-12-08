@@ -16,6 +16,14 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
@@ -59,30 +67,77 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <select class="form-control select2" style="width: 100%;">
-                                            <option selected="selected">--Select leave Type--</option>
-                                            <option>Causual Leave</option>
-                                            <option>Madical Leave</option>
-                                        </select>
-                                        <div class="form-group">
-                                            <label>Date range:</label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right" id="reservation">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Leave Reasion</label>
-                                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-outline">Save</button>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label>Leave Type</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>
+                                                        <input type="radio" name="r1" class="minimal">
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label>
+                                                        <input type="radio" name="r1" class="minimal">
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label>From:</label>
+                                                        <div class="input-group date">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </div>
+                                                            <input type="text" class="form-control pull-right" id="datepicker">
+                                                        </div>
+                                                        <!-- /.input group -->
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label>To:</label>
+                                                        <div class="input-group date">
+                                                            <div class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </div>
+                                                            <input type="text" class="form-control pull-right" id="datepicker">
+                                                        </div>
+                                                        <!-- /.input group -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>Number Of Working Days:</label>
+                                                </td>
+                                                <td>
+                                                    <label>2</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="form-group">
+                                                        <label>Leave Comments:</label>
+                                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                                    </div>
+                                                </td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline">Submit</button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline">Cancel</button>
+                                                </td>
+                                            </tr>
+                                        </table>
                                 </div>
                             </div>
                             <!-- /.modal-content -->

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmployeeLeaveTransactionModel.cs" />
+    <Compile Include="LeaveTypeModel.cs" />
     <Compile Include="UserAccountModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
