@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LMS_WebAPI_Domain;
+using LMS_WebAPI_DAL.Repositories;
+using LMS_WebAPI_DAL.Repositories.Interfaces;
+using LMS_WebAPI_DAL;
 
-using LMS_WEBAPI_DAL;
-using LMS_WEBAPI_DAL.Repositories;
-using LMS_WEBAPI_DAL.Repositories.Interfaces;
 
 namespace LMS_WebAPI_ServiceHelpers
 {
@@ -39,7 +39,7 @@ namespace LMS_WebAPI_ServiceHelpers
                     newTrans.NumberOfWorkingDays = m.NumberOfWorkingDays;
                     newTrans.RefLeaveType = m.RefLeaveType;
                     newTrans.EmployeeComment = m.EmployeeComment;
-                    newTrans.ManagerComments = m.ManagerComments;
+                    //newTrans.ManagerComments = m.ManagerComments;
                     newTrans.ModifiedDate = m.ModifiedDate;
                     Empres.Add(newTrans);
 

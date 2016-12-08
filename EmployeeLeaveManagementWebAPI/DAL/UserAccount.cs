@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LMS_WEBAPI_DAL
+namespace LMS_WebAPI_DAL
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +21,8 @@ namespace LMS_WEBAPI_DAL
         public int RefEmployeeId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
     
         public virtual EmployeeDetail EmployeeDetail { get; set; }
     }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LMS_WEBAPI_DAL
+namespace LMS_WebAPI_DAL
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +21,8 @@ namespace LMS_WEBAPI_DAL
             this.EmployeeDetails = new HashSet<EmployeeDetail>();
             this.EmployeeLeaveTransactions = new HashSet<EmployeeLeaveTransaction>();
             this.EmployeeLeaveTransactions1 = new HashSet<EmployeeLeaveTransaction>();
+            this.EmployeeLeaveTransactionHistories = new HashSet<EmployeeLeaveTransactionHistory>();
+            this.EmployeeLeaveTransactionHistories1 = new HashSet<EmployeeLeaveTransactionHistory>();
             this.EmployeeProjectDetails = new HashSet<EmployeeProjectDetail>();
             this.LeaveMasters = new HashSet<LeaveMaster>();
             this.Workflows = new HashSet<Workflow>();
@@ -38,6 +40,10 @@ namespace LMS_WEBAPI_DAL
         public virtual ICollection<EmployeeLeaveTransaction> EmployeeLeaveTransactions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeLeaveTransaction> EmployeeLeaveTransactions1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeLeaveTransactionHistory> EmployeeLeaveTransactionHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeLeaveTransactionHistory> EmployeeLeaveTransactionHistories1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeProjectDetail> EmployeeProjectDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

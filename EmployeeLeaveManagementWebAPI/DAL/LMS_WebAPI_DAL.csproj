@@ -75,6 +75,9 @@
     <Compile Include="EmployeeLeaveTransaction.cs">
       <DependentUpon>EmployeeLeaveManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeLeaveTransactionHistory.cs">
+      <DependentUpon>EmployeeLeaveManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeProjectDetail.cs">
       <DependentUpon>EmployeeLeaveManagement.tt</DependentUpon>
     </Compile>
@@ -103,17 +106,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="EmployeeLeaveManagement.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EmployeeLeaveManagement.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="EmployeeLeaveManagement.edmx.diagram">
       <DependentUpon>EmployeeLeaveManagement.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\LMS_WebAPI_Utils.csproj">
+      <Project>{0e52b307-5148-4449-98b0-ba995af29d25}</Project>
+      <Name>LMS_WebAPI_Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmployeeLeaveManagement.Context.tt">
@@ -126,15 +136,6 @@
       <DependentUpon>EmployeeLeaveManagement.edmx</DependentUpon>
       <LastGenOutput>EmployeeLeaveManagement.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Utils\LMS_WebAPI_Utils.csproj">
-      <Project>{0e52b307-5148-4449-98b0-ba995af29d25}</Project>
-      <Name>LMS_WebAPI_Utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

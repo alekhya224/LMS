@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LMS_WEBAPI_DAL
+namespace LMS_WebAPI_DAL
 {
     using System;
     using System.Collections.Generic;

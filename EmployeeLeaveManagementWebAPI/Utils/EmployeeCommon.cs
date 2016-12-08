@@ -12,7 +12,7 @@ namespace LMS_WebAPI_Utils
         public string Name { get; set; }
         public String RoleName { get; set; }
         public Nullable<System.DateTime> DateOfJoining { get; set; }
-        public double Experience { get; set; }
+        public double? Experience { get; set; }
         public Nullable<int> ManagerId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }

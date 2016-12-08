@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LMS_WEBAPI_DAL
+namespace LMS_WebAPI_DAL
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LeaveManagementSystemEntities : DbContext
+    public partial class LeaveManagementSystemEntities1 : DbContext
     {
-        public LeaveManagementSystemEntities()
-            : base("name=LeaveManagementSystemEntities")
+        public LeaveManagementSystemEntities1()
+            : base("name=LeaveManagementSystemEntities1")
         {
         }
     
@@ -28,6 +28,7 @@ namespace LMS_WEBAPI_DAL
         public virtual DbSet<EmployeeContactDetail> EmployeeContactDetails { get; set; }
         public virtual DbSet<EmployeeDetail> EmployeeDetails { get; set; }
         public virtual DbSet<EmployeeLeaveTransaction> EmployeeLeaveTransactions { get; set; }
+        public virtual DbSet<EmployeeLeaveTransactionHistory> EmployeeLeaveTransactionHistories { get; set; }
         public virtual DbSet<EmployeeProjectDetail> EmployeeProjectDetails { get; set; }
         public virtual DbSet<Holiday> Holidays { get; set; }
         public virtual DbSet<LeaveMaster> LeaveMasters { get; set; }

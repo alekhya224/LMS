@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LMS_WebAPI_Utils;
 
-namespace LMS_WEBAPI_DAL.Repositories.Interfaces
+namespace LMS_WebAPI_DAL.Repositories.Interfaces
 {
  public interface IUser
     {

@@ -1,14 +1,15 @@
-﻿using LMS_WEBAPI_DAL.Repositories.Interfaces;
+﻿using LMS_WebAPI_DAL.Repositories.Interfaces;
 using System.Linq;
 using LMS_WebAPI_Utils;
+using LMS_WebAPI_DAL;
 
-namespace LMS_WEBAPI_DAL.Repositories
+namespace LMS_WebAPI_DAL.Repositories
 {
     public class UserRepository:IUser
     {
         public EmployeeCommon GetUser(string emailId, string password)
         {
-            using (var ctx = new LeaveManagementSystemEntities())
+            using (var ctx = new LeaveManagementSystemEntities1())
             {
                 var userData = (from c in ctx.UserAccounts
                                 where c.UserName == emailId && c.Password == password

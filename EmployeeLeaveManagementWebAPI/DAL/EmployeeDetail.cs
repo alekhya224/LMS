@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LMS_WEBAPI_DAL
+namespace LMS_WebAPI_DAL
 {
     using System;
     using System.Collections.Generic;
@@ -17,24 +17,32 @@ namespace LMS_WEBAPI_DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmployeeDetail()
         {
+            this.EmployeeContactDetails = new HashSet<EmployeeContactDetail>();
             this.EmployeeLeaveTransactions = new HashSet<EmployeeLeaveTransaction>();
+            this.EmployeeLeaveTransactionHistories = new HashSet<EmployeeLeaveTransactionHistory>();
             this.EmployeeProjectDetails = new HashSet<EmployeeProjectDetail>();
             this.UserAccounts = new HashSet<UserAccount>();
             this.Workflows = new HashSet<Workflow>();
-            this.EmployeeContactDetails = new HashSet<EmployeeContactDetail>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public int RefRoleId { get; set; }
         public Nullable<System.DateTime> DateOfJoining { get; set; }
-        public double Experience { get; set; }
         public Nullable<int> ManagerId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> Experience { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+        public string EmpNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeContactDetail> EmployeeContactDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeLeaveTransaction> EmployeeLeaveTransactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeLeaveTransactionHistory> EmployeeLeaveTransactionHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeProjectDetail> EmployeeProjectDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -42,7 +50,5 @@ namespace LMS_WEBAPI_DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Workflow> Workflows { get; set; }
         public virtual MasterDataValue MasterDataValue { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeContactDetail> EmployeeContactDetails { get; set; }
     }
 }
