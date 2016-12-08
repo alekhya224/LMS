@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LMS_WebAPI_Domain
 {
-   public class LeaveTypeModel
+    public class LeaveTypeModel
     {
         public string LeaveType { get; set; }
     }

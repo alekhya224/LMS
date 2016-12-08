@@ -1,7 +1,8 @@
 ﻿@model EmployeeLeaveManagementApp.Models.LoginModel
 @{
     Layout = null;
-  
+    bool userExist = Convert.ToBoolean(ViewBag.UserExist);
+
 }
 <!DOCTYPE html>
 <html>
@@ -40,16 +41,16 @@
                 <div class="form-group has-feedback">
                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Enter your email", maxlength = "256", onChange = "TrimEmail(this);" })
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    <span class="error">@Html.ValidationMessageFor(m => m.UserName)</span>
-                 
-                    
-                </div>
+                    <span class="error">@Html.ValidationMessageFor(m => m.UserName)</span></div>
                 <div class="form-group has-feedback">
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", maxlength = "50" })
                     <span class="error">
                         @Html.ValidationMessageFor(m => m.Password)
                     </span>
-
+                    @if (!userExist)
+                    {
+                        <span class="error">User name or password incorrect</span>
+                    }
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">

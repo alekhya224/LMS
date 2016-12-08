@@ -7,12 +7,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using LMS_WebAPP_Domain;
 
-
 namespace LMS_WebAPP_ServiceHelpers
 {
     public class UserManagement
     {
-        static HttpClient client = new HttpClient();
+
+
         ////static async Task<UserAccount> GetProductAsync(string path)
         ////{
         ////    UserAccount user = null;
@@ -34,32 +34,60 @@ namespace LMS_WebAPP_ServiceHelpers
         ////    Console.ReadLine();
         ////}
 
-        private const string URL = "http://localhost:64476/api/Account/Login";
         private string urlParameters = "";
 
-        public async Task<UserAccount> GetUserAsync(string userName,string password)
+        public async Task<UserAccount> GetUserAsync(string userName, string password)
         {
-            HttpClient client = new HttpClient();
-            urlParameters = "?userName=" + userName + "&password=" + password;
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-
-            // List data response.
-            HttpResponseMessage response = await client.GetAsync(urlParameters);  // Blocking call!
-            if (response.IsSuccessStatusCode)
+            using (HttpClient client = new HttpClient())
             {
-                // Parse the response body. Blocking!
-                var dataObjects = await response.Content.ReadAsAsync<UserAccount>();
-                return dataObjects;
-               
+                const string URL = "http://localhost:64476/api/Account/Login";
+                urlParameters = "?userName=" + userName + "&password=" + password;
+                client.BaseAddress = new Uri(URL);
+
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // List data response.
+                HttpResponseMessage response = await client.GetAsync(urlParameters);  // Blocking call!
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. Blocking!
+                    var dataObjects = await response.Content.ReadAsAsync<UserAccount>();
+                    return dataObjects;
+                }
+                else
+                {
+                    Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                    return null;
+                }
             }
-            else
+        }
+
+        public async Task<EmployeeDetailsModel> GetUserDetailsAsync(int EmpId)
+        {
+            using (HttpClient client = new HttpClient())
             {
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-                return null;
+                const string URL = "http://localhost:64476/api/Account/GetUserDetails";
+                urlParameters = "?empId=" + EmpId;
+                client.BaseAddress = new Uri(URL);
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // List data response.
+                HttpResponseMessage response = await client.GetAsync(urlParameters);  // Blocking call!
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. Blocking!
+                    var dataObjects = await response.Content.ReadAsAsync<EmployeeDetailsModel>();
+                    return dataObjects;
+                }
+                else
+                {
+                    Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                    return null;
+                }
             }
         }
     }

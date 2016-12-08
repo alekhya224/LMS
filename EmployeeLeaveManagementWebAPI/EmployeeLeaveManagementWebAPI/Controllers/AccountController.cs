@@ -327,17 +327,47 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
         [HttpGet]
         public UserAccountModel Login(string userName, string password)
         {
-            var userData = userManager.GetUser(userName, password);
-            if (null != userData)
+            try
             {
-                return userData;
+                var userData = userManager.GetUser(userName, password);
+                if (null != userData)
+                {
+                    return userData;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
                 return null;
+
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public EmployeeDetailsModel GetUserDetails(int empId)
+        {
+            try
+            {
+                var empData = userManager.GetEmployeeDatailsForDashboard(empId);
+                if (null != empData)
+                {
+                    return empData;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+                //throw;
+            }
+        }
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]

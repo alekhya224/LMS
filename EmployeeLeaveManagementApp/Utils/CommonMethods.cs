@@ -31,5 +31,62 @@ namespace LMS_WebAPP_Utils
                 throw ex;
             }
         }
+
+        public static string EncryptString(string message)
+        {
+            string result = null;
+            byte[] Results;
+            System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
+            MD5CryptoServiceProvider HashProvider = new MD5CryptoServiceProvider();
+            byte[] TDESKey = HashProvider.ComputeHash(UTF8.GetBytes(Constants.SALT));
+            TripleDESCryptoServiceProvider TDESAlgorithm = new TripleDESCryptoServiceProvider();
+            TDESAlgorithm.Key = TDESKey;
+            TDESAlgorithm.Mode = CipherMode.ECB;
+            TDESAlgorithm.Padding = PaddingMode.PKCS7;
+            byte[] DataToEncrypt = UTF8.GetBytes(message);
+            try
+            {
+                ICryptoTransform encryptor = TDESAlgorithm.CreateEncryptor();
+                Results = encryptor.TransformFinalBlock(DataToEncrypt, 0, DataToEncrypt.Length);
+                result = Convert.ToBase64String(Results);
+            }
+            finally
+            {
+                TDESAlgorithm.Clear();
+                HashProvider.Clear();
+            }
+            return result;
+        }
+
+        public static string DecryptString(string Message)
+        {
+            string result = null;
+            byte[] Results;
+            System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
+            MD5CryptoServiceProvider HashProvider = new MD5CryptoServiceProvider();
+            byte[] TDESKey = HashProvider.ComputeHash(UTF8.GetBytes(Constants.SALT));
+            TripleDESCryptoServiceProvider TDESAlgorithm = new TripleDESCryptoServiceProvider();
+            TDESAlgorithm.Key = TDESKey;
+            TDESAlgorithm.Mode = CipherMode.ECB;
+            TDESAlgorithm.Padding = PaddingMode.PKCS7;
+            try
+            {
+                byte[] DataToDecrypt = Convert.FromBase64String(Message);
+                ICryptoTransform Decryptor = TDESAlgorithm.CreateDecryptor();
+                Results = Decryptor.TransformFinalBlock(DataToDecrypt, 0, DataToDecrypt.Length);
+                result = UTF8.GetString(Results);
+            }
+            catch (Exception ex)
+            {
+                //Logger.Error("CommonMethods : DecryptString(): Caught an Error " + ex);
+                return result;
+            }
+            finally
+            {
+                TDESAlgorithm.Clear();
+                HashProvider.Clear();
+            }
+            return result;
+        }
     }
     }
