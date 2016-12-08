@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Utils;
+using LMS_WebAPI_Utils;
 
-namespace DAL.Repositories.Interfaces
+namespace LMS_WEBAPI_DAL.Repositories.Interfaces
 {
  public interface IUser
     {

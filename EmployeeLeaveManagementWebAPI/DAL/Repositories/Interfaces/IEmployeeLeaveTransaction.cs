@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Repositories.Interfaces
+namespace LMS_WEBAPI_DAL.Repositories.Interfaces
 {
     public interface IEmployeeLeaveTransaction
     {

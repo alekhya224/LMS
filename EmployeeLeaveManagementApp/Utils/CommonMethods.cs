@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utils
+namespace LMS_WebAPP_Utils
 {
     public class CommonMethods
     {

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using LMS_WebAPP_ServiceHelpers;
-using Utils;
+using LMS_WebAPP_Utils;
 using LMS_WebAPP_Domain;
 using System.Threading.Tasks;
 

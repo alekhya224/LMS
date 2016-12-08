@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL
+namespace LMS_WEBAPI_DAL
 {
     using System;
     using System.Data.Entity;

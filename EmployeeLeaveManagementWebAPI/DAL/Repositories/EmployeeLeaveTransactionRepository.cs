@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Repositories.Interfaces;
+using LMS_WEBAPI_DAL.Repositories.Interfaces;
 
-namespace DAL.Repositories
+namespace LMS_WEBAPI_DAL.Repositories
 {
     public class EmployeeLeaveTransactionRepository : IEmployeeLeaveTransaction
     {

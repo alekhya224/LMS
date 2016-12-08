@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LMS_WEBAPI_DAL.Repositories.Interfaces;
 using System.Linq;
-using System.Data.Entity;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Repositories.Interfaces;
-using Utils;
+using LMS_WebAPI_Utils;
 
-namespace DAL.Repositories
+namespace LMS_WEBAPI_DAL.Repositories
 {
- public class UserRepository:IUser
+    public class UserRepository:IUser
     {
         public EmployeeCommon GetUser(string emailId, string password)
         {

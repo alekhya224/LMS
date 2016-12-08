@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LMS_WebAPI_Domain;
-using Utils;
-using DAL;
-using DAL.Repositories;
-using DAL.Repositories.Interfaces;
+using LMS_WebAPI_Utils;
+using LMS_WEBAPI_DAL;
+using LMS_WEBAPI_DAL.Repositories;
+using LMS_WEBAPI_DAL.Repositories.Interfaces;
 
 namespace LMS_WebAPI_ServiceHelpers
 {
