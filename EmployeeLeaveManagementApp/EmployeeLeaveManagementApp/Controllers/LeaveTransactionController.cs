@@ -11,7 +11,7 @@ namespace EmployeeLeaveManagementApp.Controllers
         
 
         // GET: LeaveTransection
-        public async Task<ActionResult> LeaveTransection()
+        public async Task<ActionResult> LeaveTransaction()
         {
             EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
             var res = await ELTM.GetProductAsync();

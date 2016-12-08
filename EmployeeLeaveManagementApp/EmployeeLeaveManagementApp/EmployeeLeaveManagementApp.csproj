@@ -1156,10 +1156,11 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Dashboard.cshtml" />
     <Content Include="Views\LeaveTransaction\LeaveTransaction.cshtml" />
+    <Content Include="Views\ApplyLeave\AddLeave.cshtml" />
+    <Content Include="Views\ApplyLeave\ApplyLeave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ApplyLeave\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
