@@ -2,46 +2,79 @@
 using System.Linq;
 using LMS_WebAPI_Utils;
 using LMS_WebAPI_DAL;
+using System;
 
 namespace LMS_WebAPI_DAL.Repositories
 {
-    public class UserRepository:IUser
+    public class UserRepository : IUser
     {
-        public EmployeeCommon GetUser(string emailId, string password)
+        public UserAccount GetUser(string emailId, string password)
         {
-            using (var ctx = new LeaveManagementSystemEntities1())
+            try
             {
-                var userData = (from c in ctx.UserAccounts
-                                where c.UserName == emailId && c.Password == password
-                                select c).FirstOrDefault();
-                if (userData != null)
+                using (var ctx = new LeaveManagementSystemEntities1())
                 {
-
-                    var EmpDetails = ctx.EmployeeDetails.Select(n => new EmployeeCommon()
+                    var userData = (from c in ctx.UserAccounts
+                                    where c.UserName == emailId && c.Password == password
+                                    select c).FirstOrDefault();
+                    if (userData != null)
                     {
-                        Name = n.Name,
-                        ManagerId = n.ManagerId,
-                        Experience = n.Experience,
-                        RoleName = n.MasterDataValue.Value,
-                        DateOfJoining = n.DateOfJoining,
+                        return userData;
                     }
-                     ).FirstOrDefault();
-                    var LeaveType = ctx.LeaveMasters.ToList();
-                    EmpDetails.TotalLeaveCount = LeaveType.Sum(q => q.Count);
-
-                    EmpDetails.TotalCountTaken = (from c in ctx.EmployeeLeaveTransactions
-                                                  where c.RefEmployeeId == userData.RefEmployeeId
-                                                  select c.NumberOfWorkingDays).ToList().Sum();
-                    var empdata = (from n in ctx.EmployeeProjectDetails
-                                   where n.RefEmployeeId == userData.RefEmployeeId
-                                   select n).SingleOrDefault();
-                    EmpDetails.ProjectName = empdata.MasterDataValue.Value;
-                    EmpDetails.ManagerName = (from n in ctx.EmployeeDetails where n.Id == EmpDetails.ManagerId select n.Name).SingleOrDefault();
-                    return EmpDetails;
-                }
-                else
                     return null;
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
             }
         }
+
+        public EmployeeCommon GetUserDetails(int UserEmpId)
+        {
+            try
+            {
+                using (var ctx = new LeaveManagementSystemEntities1())
+                {
+                    var empDetails = (from n in ctx.EmployeeDetails
+                                      where n.Id == UserEmpId
+                                      select new EmployeeCommon()
+                                      {
+                                          Id = n.Id,
+                                          Name = n.Name,
+                                          ManagerId = n.ManagerId,
+                                          Experience = n.Experience,
+                                          RoleName = n.MasterDataValue.Value,
+                                          DateOfJoining = n.DateOfJoining,
+                                      }).FirstOrDefault();
+                    if (null != empDetails)
+                    {
+                        var LeaveType = ctx.LeaveMasters.ToList();
+                        empDetails.TotalLeaveCount = LeaveType.Sum(q => q.Count);
+
+                        empDetails.TotalCountTaken = (from c in ctx.EmployeeLeaveTransactions
+                                                      where c.RefEmployeeId == UserEmpId
+                                                      select c.NumberOfWorkingDays).ToList().Sum();
+                        
+                        var empdata = (from n in ctx.EmployeeProjectDetails
+                                       where n.RefEmployeeId == UserEmpId
+                                       select n).SingleOrDefault();
+                        empDetails.ProjectName = empdata.MasterDataValue.Value;
+                        empDetails.ManagerName = (from n in ctx.EmployeeDetails where n.Id == empDetails.ManagerId select n.Name).SingleOrDefault();
+
+                        return empDetails;
+                    }
+                    else
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }

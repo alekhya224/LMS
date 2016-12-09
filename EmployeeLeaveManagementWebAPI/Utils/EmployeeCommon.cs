@@ -23,5 +23,7 @@ namespace LMS_WebAPI_Utils
         public string ProjectName { get; set; }
         public int? TotalLeaveCount { get; set; }
         public int TotalCountTaken { get; set; }
+
+        public IDictionary<string,int> MonthlyLeaveReport { get; set; }
     }
 }

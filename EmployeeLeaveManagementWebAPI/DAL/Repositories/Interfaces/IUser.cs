@@ -9,6 +9,9 @@ namespace LMS_WebAPI_DAL.Repositories.Interfaces
 {
  public interface IUser
     {
-        EmployeeCommon GetUser(string emailId, string password);
+        UserAccount  GetUser(string emailId, string password);
+
+        EmployeeCommon GetUserDetails(int UserEmpId);
+
     }
 }
