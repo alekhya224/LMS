@@ -27,5 +27,17 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
         {
             return "value";
         }
+
+        public List<EmployeeLeaveTransactionModel> Get(int leaveType, string fromDate, string toDate, string comments, int workingDays)
+        {
+            EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
+            var detailsInserted = ELTM.InsertEmployeeLeaveDetails(leaveType,fromDate,toDate,comments,workingDays);
+            var res = new List<EmployeeLeaveTransactionModel>();
+            if(detailsInserted)
+            {
+                res = ELTM.GetEmployeeLeaveTransaction();
+            }
+            return res;
+        }
     }
 }

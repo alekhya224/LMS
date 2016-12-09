@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using LMS_WebAPP_ServiceHelpers;
 using System.Threading.Tasks;
+using System;
+using LMS_WebAPP_Utils;
 
 namespace EmployeeLeaveManagementApp.Controllers
 {
@@ -15,7 +17,7 @@ namespace EmployeeLeaveManagementApp.Controllers
         {
             EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
             var res = await ELTM.GetProductAsync();
-
+            //var values = Enum.GetValues(typeof(LeaveType));
             return View(res);
         }
 
@@ -23,6 +25,15 @@ namespace EmployeeLeaveManagementApp.Controllers
         {
             return View();
 
+        }
+        [HttpPost]
+        public async  Task<ActionResult> SubmitLeaveRequest(int leaveType,string fromDate,string toDate,string comments,int workingDays)
+        {
+            EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
+          
+            var res =await  ELTM.SubmitLeaveRequestAsync(leaveType, fromDate,toDate,comments,workingDays);
+            //return RedirectToAction("ApplyLeave");
+             return Json(new { result = res });
         }
     }
 }

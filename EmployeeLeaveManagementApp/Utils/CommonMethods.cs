@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LMS_WebAPP_Utils
 {
-    public class CommonMethods
+    public static class CommonMethods
     {
 
         public static string EncryptDataForLogins(string username, string password)
@@ -88,5 +89,16 @@ namespace LMS_WebAPP_Utils
             }
             return result;
         }
+
+        public static string Description(this Enum enumValue)
+        {
+            var enumType = enumValue.GetType();
+            var field = enumType.GetField(enumValue.ToString());
+            var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length == 0
+                ? enumValue.ToString()
+                : ((DescriptionAttribute)attributes[0]).Description;
+        }
+
     }
-    }
+}

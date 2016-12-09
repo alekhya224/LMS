@@ -7,18 +7,20 @@ using LMS_WebAPI_Domain;
 using LMS_WebAPI_DAL.Repositories;
 using LMS_WebAPI_DAL.Repositories.Interfaces;
 using LMS_WebAPI_DAL;
-
+using LMS_WebAPI_Utils;
 
 namespace LMS_WebAPI_ServiceHelpers
 {
     public class EmployeeLeaveTransactionManagement
     {
         private IEmployeeLeaveTransaction EmployeeLeaves  = new EmployeeLeaveTransactionRepository();
+        private IAddLeaveRepository addLeaveRepository = new AddLeaveRepository();
         public List<EmployeeLeaveTransactionModel> GetEmployeeLeaveTransaction()
         {
             var EmployeeLeaveTransaction = EmployeeLeaves.GetEmployeeLeaveTransaction();
+            // var leaveType = addLeaveRepository.GetLeaveType();
             var retResult = ToModel(EmployeeLeaveTransaction);
-
+   
             return retResult;
         }
 
@@ -27,6 +29,7 @@ namespace LMS_WebAPI_ServiceHelpers
             List<EmployeeLeaveTransactionModel> Empres = new List<EmployeeLeaveTransactionModel>();
             try
             {
+                
                 foreach (var m in employeeLeaveTransaction)
                 {
                     var newTrans = new EmployeeLeaveTransactionModel();
@@ -55,6 +58,13 @@ namespace LMS_WebAPI_ServiceHelpers
 
 
 
+        }
+
+        public bool InsertEmployeeLeaveDetails(int leaveType, string fromDate, string toDate, string comments, int workingDays)
+        {
+            var insertEmployeeDetails = addLeaveRepository.InsertEmployeeLeaveDetails(leaveType, fromDate, toDate, comments, workingDays);
+
+            return insertEmployeeDetails;
         }
     }
 }

@@ -35,11 +35,24 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+
     <!-- Content Wrapper. Contains page content -->
     <!-- Main content -->
-    <h2>Apply Leave</h2>
+    <section class="content-header" style="height:41px">
+        <h1 class="col-md-9">
+            Leave
+            <small>apply leave</small>
+        </h1>
+        <div style="float:right" class="col-md-3">
+            <button type="button" id="btnaddleave" class="btn btn-block btn-primary">Add Leave <i class="fa fa-plus"></i></button>
+
+        </div>
+    </section>
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -56,25 +69,26 @@
                                     <th>Leave Type</th>
                                 </tr>
                             </thead>
-                            @foreach (LMS_WebAPP_Domain.LeaveTransaction m in Model)
-                            {
-                                <tbody>
+                            <tbody>
+                                @foreach (LMS_WebAPP_Domain.LeaveTransaction m in Model)
+                                {
+
                                     <tr>
                                         <td>@m.FromDate.Date.ToString("dd/MM/yyyy")</td>
                                         <td>@m.ToDate.Date.ToString("dd/MM/yyyy")</td>
                                         <td>@m.CreatedDate.Date.ToString("dd/MM/yyyy")</td>
-                                        <td>@m.RefStatus</td>
+                                        <td>@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveStatus)m.RefStatus))</td>
                                         <td>@m.NumberOfWorkingDays</td>
-                                        <td>@m.RefLeaveType</td>
+                                        <td>@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)m.RefLeaveType))</td>
+                                        @*<td>@m.RefLeaveType</td>*@
                                     </tr>
-                                </tbody>
 
-                            }
+
+                                }
+                            </tbody>
                             <tfoot>
                                 <tr>
-                                    <td>
-                                        <button type="button" id="btnaddleave" class="btn btn-block btn-primary" onclick="addleave()" >Add Leave</button>
-                                    </td>
+                                    <td></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -88,36 +102,102 @@
         <!-- /.row -->
     </section>
     <div id="AddLeave"></div>
-    <div id="dialog" style="display: none" align="center">
-        <section class="content">
-            <div class="example-modal">
-                <div class="modal modal-primary">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Add Leave</h4>
+    <div class="example-modal">
+        <div class="modal" id="AddLeaveModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Add Leave</h4>
+                    </div>
+                    <div class="modal-body" style="height:250px">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Leave Type</label>
                             </div>
-                            <div class="modal-body">
-                                <p>One fine body&hellip;</p>
+
+                            <div class="col-md-12">
+                                @foreach (var value in Enum.GetValues(typeof(LMS_WebAPP_Utils.LeaveType)))
+                                {
+                                    <div class="col-md-6">
+                                        <input type="radio" name="r1" class="flat-red" value="@Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)">@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)))
+                                    </div>
+                                }
+
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-outline">Save</button>
+
+                            <div class="col-md-12">
+                                <label>Date range:</label>
+                            </div>
+
+                            <div class="input-group" style="padding-left:12px;padding-right:16px">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" id="leaveDatepicker">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Number Of Working Days:</label>
+                                <span id="lblTotalWorkingDays"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Leave Comments:</label>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea id="leaveComment" rows="3" style="width:539px" placeholder="Enter ..."></textarea>
+                            </div>
+
+                            <div>
+                                
                             </div>
                         </div>
-                        <!-- /.modal-content -->
                     </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-            </div>
-            <!-- /.example-modal -->
 
-        </section>
+                                        <div class="modal-footer">
+           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                <button type="button" id="btnLeaveRequestSubmit" class="btn btn-primary">Submit</button>
+        </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </div>
+    @*<div id="dialog" style="display: none" align="center">
+            <section class="content">
+                <div class="example-modal">
+                    <div class="modal modal-primary">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">Add Leave</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>One fine body&hellip;</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-outline">Save</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+                <!-- /.example-modal -->
+
+            </section>
+        </div>*@
     <!-- /.content -->
     <!-- ./wrapper -->
     <!-- jQuery 2.2.3 -->
@@ -136,34 +216,83 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- page script -->
-    <script>
- $(document).ready(function() {
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
-  $('#btnaddleave').on('click', function () {
-      $("#AddLeave").dialog({
-          autoOpen: true,
-          position: { my: "center", at: "top+350", of: window },
-          width: 1000,
-          resizable: false,
-          title: 'Add Leave',
-          modal: true,
-          open: function () {
-              $(this).load('@Url.Action("AddLeave", "AddLeave")');
-          }
-      });
+    <script src="~/plugins/daterangepicker/moment.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>*@
+    <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../../plugins/iCheck/icheck.min.js"></script>
 
-  });
- });
+    <script>
+        var fromDate;
+        var toDate;
+        $(document).ready(function () {
+            $(function () {
+                $("#example1").DataTable();
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#leaveDatepicker').daterangepicker(
+                    {
+                        minDate: new Date()
+                    });
+                $('#leaveDatepicker').on('apply.daterangepicker', function (ev, picker) {
+
+                    var start = picker.startDate;
+                    fromDate = start.format('YYYY-MM-DD');
+                    var end = picker.endDate;
+                    toDate = end.format('YYYY-MM-DD');
+                    var days = (end - start) / (1000 * 60 * 60 * 24);
+
+                    var weekend_count = 0;
+                    for (i = start.valueOf() ; i <= end.valueOf() ; i += 86400000) {
+                        var temp = new Date(i);
+                        if (temp.getDay() == 0 || temp.getDay() == 6) {
+                            weekend_count++;
+                        }
+                    }
+                    days = days - weekend_count
+                    $("#lblTotalWorkingDays").html(Math.round(days));
+                });
+            });
+
+
+            $('#btnaddleave').on('click', function () {
+
+                $('#AddLeaveModal').modal('show');
+            });
+        });
+
+        $("#btnLeaveRequestSubmit").on('click', function () {
+           
+            var comments = $("#leaveComment").val();
+            fromDate = fromDate;
+            toDate = toDate;
+            var leaveType = $('input[name=r1]:checked').val();
+            var workingDays = $("#lblTotalWorkingDays").html();
+            $.ajax({
+                cache: false,
+                type: 'post',
+                url: '/ApplyLeave/SubmitLeaveRequest',
+                data: { leaveType: leaveType, fromDate: fromDate, toDate: toDate, comments: comments, workingDays: workingDays },
+                //contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#AddLeaveModal').modal('hide');
+                    location.reload();
+                }
+            });
+        }
+        );
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
     </script>
 </body>
 </html>

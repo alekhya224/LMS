@@ -13,14 +13,14 @@ namespace LMS_WebAPP_ServiceHelpers
         static HttpClient client = new HttpClient();
 
 
-        private const string URL = "http://localhost:64476/api/EmployeeLeaveTrans";
+        private string URL = "http://localhost:64476/api/EmployeeLeaveTrans";
         // private string urlParameters = "?userName=anualoor&password=Temp@123";
 
         public async Task<IList<LeaveTransaction>> GetProductAsync()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(URL);
-
+            
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
@@ -36,5 +36,28 @@ namespace LMS_WebAPP_ServiceHelpers
             }
             return null;
         }
-      }
+
+        public async Task<IList<LeaveTransaction>> SubmitLeaveRequestAsync(int leaveType,string fromDate,string toDate,string comments,int workingDays)
+        {
+            HttpClient client = new HttpClient();
+           var urlParameters = "?leaveType=" + leaveType + "&fromDate=" + fromDate + "&toDate="+ toDate+"&comments="+comments+"&workingDays="+workingDays;
+            //URL = URL + "/SubmitLeaveRequest";
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            HttpResponseMessage response = await client.GetAsync(urlParameters);  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                var dataObjects = response.Content.ReadAsAsync<IList<LeaveTransaction>>().Result.ToList();
+                return dataObjects;
+
+            }
+            return null;
+        }
+    }
 }

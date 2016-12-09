@@ -19,5 +19,8 @@ namespace LMS_WebAPP_Domain
         public string EmployeeComment { get; set; }
         public string ManagerComments { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+
+        public List<string> LeaveType { get; set; }
+
     }
 }
