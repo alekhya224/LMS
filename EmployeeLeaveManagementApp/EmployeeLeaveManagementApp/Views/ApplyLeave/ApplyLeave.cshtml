@@ -38,7 +38,11 @@
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="../../plugins/iCheck/all.css">
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-
+    @*<style>
+            .paginate_button{
+                background-color:#222d32 !important;
+            }
+        </style>*@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
@@ -50,7 +54,7 @@
         </h1>
         <div style="float:right;padding-right:0px" class="col-md-2">
             <button type="button" id="btnaddleave" class="btn btn-block bg-black" data-toggle="modal" data-target=".bs-add-leave-modal" style="background-color:#222d32 !important"><i class="fa fa-plus"></i>&nbsp; Add Leave </button>
-            
+
         </div>
     </section>
 
@@ -66,13 +70,17 @@
                                     <th>To Date</th>
                                     <th>Submitted Date</th>
                                     <th>Status</th>
-                                    <th>Number of working Days</th>
+                                    <th style="width:160px">Number of working Days</th>
                                     <th>Leave Type</th>
+                                    <th>Apply</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (LMS_WebAPP_Domain.LeaveTransaction m in Model)
                                 {
+                                    var btnDisabled = m.RefStatus > 9 ? "disabled" : "";
+
 
                                     <tr>
                                         <td>@m.FromDate.Date.ToString("dd/MM/yyyy")</td>
@@ -81,7 +89,8 @@
                                         <td>@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveStatus)m.RefStatus))</td>
                                         <td>@m.NumberOfWorkingDays</td>
                                         <td>@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)m.RefLeaveType))</td>
-                                        @*<td>@m.RefLeaveType</td>*@
+                                        <td><button type="button" id="btnApplyLeave" class="btn btn-block bg-black @btnDisabled" style="background-color:#222d32 !important" data-content="@m.Id">Apply </button></td>
+                                        <td><button type="button" id="btnDeleteLeave" class="btn btn-block bg-black @btnDisabled" style="background-color:#222d32 !important" data-content="@m.Id">Delete </button></td>
                                     </tr>
 
 
@@ -102,93 +111,92 @@
         </div>
         <!-- /.row -->
     </section>
-        <div class="modal bs-add-leave-modal" id="AddLeaveModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">Add Leave</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group" style="padding-bottom:20px">
-
-                            <div>
-                                <label>Leave Type</label>
-                            </div>
-                            <span class="form-group has-error" style="display:none" id="divLeaveTypeError">
-                                <label class="control-label" for="inputError">
-                                    <i class="fa fa-times-circle-o"></i> Please select leave type
-                                </label>
-                            </span>
-
-                            <div>
-                                @foreach (var value in Enum.GetValues(typeof(LMS_WebAPP_Utils.LeaveType)))
-                                {
-                                    <div class="col-md-6">
-                                        <input type="radio" name="r1" class="flat-red" value="@Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)">&nbsp; @(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)))
-                                    </div>
-                                }
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <label>Date range:</label>
-                            </div>
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control pull-right" id="leaveDatepicker">
-                            </div>
-
-
-                            <div class="form-group has-error" style="display:none" id="divDatePickerError">
-                                <label class="control-label" for="inputError">
-                                    <i class="fa fa-times-circle-o"></i> Please select a valid date range.
-                                </label>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <label>Number Of Working Days:</label>
-                                <span id="lblTotalWorkingDays"></span>
-                            </div>
-</div>
-                        <div class="form-group">
-                            <div>
-                                <label>Leave Comments:</label>
-                            </div>
-
-                            <div>
-                                <textarea id="leaveComment" rows="3" style="width:568px" placeholder="Enter ..."></textarea>
-                            </div>
-                            <div class="form-group has-error" style="display:none" id="divCommentError">
-                                <label class="control-label" for="leaveComment">
-                                    <i class="fa fa-times-circle-o"></i> Please enter the comments
-                                </label>
-
-                            </div>
-
-                            </div>
-                        </div>
-
-                                        <div class="modal-footer">
-           <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data->Cancel</button>
-                <button type="button" id="btnLeaveRequestSubmit" class="btn btn-primary">Submit</button>
-        </div>
+    <div class="modal bs-add-leave-modal" id="AddLeaveModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Add Leave</h4>
                 </div>
-                <!-- /.modal-content -->
+                <div class="modal-body">
+                    <div class="form-group" style="padding-bottom:20px">
+
+                        <div>
+                            <label>Leave Type</label>
+                        </div>
+                        <span class="form-group has-error" style="display:none" id="divLeaveTypeError">
+                            <label class="control-label" for="inputError">
+                                <i class="fa fa-times-circle-o"></i> Please select leave type
+                            </label>
+                        </span>
+
+                        <div>
+                            @foreach (var value in Enum.GetValues(typeof(LMS_WebAPP_Utils.LeaveType)))
+                            {
+                                <div class="col-md-6">
+                                    <input type="radio" name="r1" class="flat-red" value="@Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)">&nbsp; @(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)))
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label>Date range:</label>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="leaveDatepicker">
+                        </div>
+
+
+                        <div class="form-group has-error" style="display:none" id="divDatePickerError">
+                            <label class="control-label" for="inputError">
+                                <i class="fa fa-times-circle-o"></i> Please select a valid date range.
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label>Number Of Working Days:</label>
+                            <span id="lblTotalWorkingDays"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label>Leave Comments:</label>
+                        </div>
+
+                        <div>
+                            <textarea id="leaveComment" rows="3" style="width:568px" placeholder="Enter ..."></textarea>
+                        </div>
+                        <div class="form-group has-error" style="display:none" id="divCommentError">
+                            <label class="control-label" for="leaveComment">
+                                <i class="fa fa-times-circle-o"></i> Please enter the comments
+                            </label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="btnLeaveRequestSubmit" style="background-color:#222d32 !important" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" data->Cancel</button>
+
+                </div>
             </div>
-            <!-- /.modal-dialog -->
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal -->
-  
-             
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
     <!-- /.content -->
     <!-- ./wrapper -->
     <!-- jQuery 2.2.3 -->
@@ -226,24 +234,25 @@
                     "searching": false,
                     "ordering": true,
                     "info": true,
-                    "autoWidth": false
+                    "autoWidth": false,
                 });
+                $("#example1.dataTables_filter").hide();
                 $('#leaveDatepicker').daterangepicker(
                     {
                         minDate: new Date()
                     });
                 $('#leaveDatepicker').on('change.daterangepicker', function (ev, picker) {
                     var date = ev.target.value;
-                    var dates=[];
-                    dates=date.split('-');
+                    var dates = [];
+                    dates = date.split('-');
                     var start = dates[0].trim();
                     var startDate = new Date(start);
                     var startMonth = startDate.getMonth() + 1;
-                    fromDate = startDate.getFullYear()+"-"+startMonth+"-"+startDate.getDate();
+                    fromDate = startDate.getFullYear() + "-" + startMonth + "-" + startDate.getDate();
                     var end = dates[1].trim();
                     var endDate = new Date(end);
                     var endMonth = endDate.getMonth() + 1;
-                    toDate = endDate.getFullYear() + "-" + endMonth+ "-" + endDate.getDate();
+                    toDate = endDate.getFullYear() + "-" + endMonth + "-" + endDate.getDate();
                     //toDate = end.toString("YYYY-MM-DD");
                     var days = (endDate - startDate) / (1000 * 60 * 60 * 24);
                     days += 1;
@@ -283,12 +292,15 @@
                 $(this).find("input.flat-red:checked").parent().removeClass('checked');
                 $("#divCommentError").hide();
                 $("#divLeaveTypeError").hide();
-                $.daterangepicker._clearDate
 
             });
         });
 
-        $("#btnLeaveRequestSubmit").on('click', function () {
+        $("#leaveComment").keypress(function (e) {
+            $("#divCommentError").hide();
+        });
+
+        $(document).on('click', '#btnLeaveRequestSubmit', function (e) {
             $("#divCommentError").hide();
             $("#divLeaveTypeError").hide();
             if ($("#leaveComment").val() == "" && $('input[name=r1]:checked').val() == undefined) {
@@ -320,6 +332,7 @@
                     success: function (data) {
                         $('#AddLeaveModal').modal('hide');
                         location.reload();
+                        showSuccessMessage("Leave request successfully submitted");
                     }
                 });
             }
@@ -329,6 +342,49 @@
             checkboxClass: 'icheckbox_flat-green',
             radioClass: 'iradio_flat-green'
         });
+
+       // $(document).on('click', '#btnApplyLeave', function (e) {
+       //     var id = $(this).data("content");
+       //     $.ajax({
+       //         cache: false,
+       //         type: 'post',
+       //         url: '/ApplyLeave/SubmitLeaveForApproval',
+       //         data: { id: id },
+       //         //contentType: "application/json; charset=utf-8",
+       //         dataType: "json",
+       //         success: function (data) {
+       //             location.reload();
+       //         }
+       //     });
+       // }
+       // );
+
+        
+       // $(document).on('click', '#btnDeleteLeave', function (e) {
+       //     var id = $(this).data("content");
+       //     $.ajax({
+       //         cache: false,
+       //         type: 'post',
+       //         url: '/ApplyLeave/DeleteLeaveRequest',
+       //         data: { id: id },
+       //         //contentType: "application/json; charset=utf-8",
+       //         dataType: "json",
+       //         success: function (data) {
+       //             location.reload();
+       //         }
+       //     });
+       // }
+       //);
+
+        //function showSuccessMessage(message, fadeOut) {
+        //    //To clear existing toastr
+        //    toastr.clear();
+        //    //fadeOut = false;
+        //    var position = "bottom-full-width";
+        //    toastr.options.positionClass = 'toast-' + position;
+        //    if (typeof fadeOut !== "undefined" && fadeOut == false) { toastr.options.timeOut = 0; }
+        //    toastr.success(message);
+        //}
     </script>
 </body>
 </html>

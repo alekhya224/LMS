@@ -59,5 +59,53 @@ namespace LMS_WebAPP_ServiceHelpers
             }
             return null;
         }
+
+        public async Task<IList<LeaveTransaction>> SubmitLeaveForApprovalAsync(int id)
+        {
+            HttpClient client = new HttpClient();
+            var urlParameters = "?id=" + id;
+            //URL = URL + "/SubmitLeaveRequest";
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            HttpResponseMessage response = await client.GetAsync(urlParameters);  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                var dataObjects = response.Content.ReadAsAsync<IList<LeaveTransaction>>().Result.ToList();
+                return dataObjects;
+
+            }
+            return null;
+        }
+
+
+        public async Task<IList<LeaveTransaction>> DeleteLeaveRequestAsync(int leaveId)
+        {
+            HttpClient client = new HttpClient();
+            var urlParameters = "?leaveId=" + leaveId+"&employeeId="+leaveId;
+            //URL = URL + "/SubmitLeaveRequest";
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            HttpResponseMessage response = await client.GetAsync(urlParameters);  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                var dataObjects = response.Content.ReadAsAsync<IList<LeaveTransaction>>().Result.ToList();
+                return dataObjects;
+
+            }
+            return null;
+        }
+
     }
 }

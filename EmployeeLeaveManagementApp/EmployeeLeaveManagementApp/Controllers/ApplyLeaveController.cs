@@ -35,5 +35,26 @@ namespace EmployeeLeaveManagementApp.Controllers
             //return RedirectToAction("ApplyLeave");
              return Json(new { result = res });
         }
+
+        [HttpPost]
+        public async Task<ActionResult> SubmitLeaveForApproval(int id)
+        {
+            EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
+
+            var res = await ELTM.SubmitLeaveForApprovalAsync(id);
+            //return RedirectToAction("ApplyLeave");
+            return Json(new { result = res });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteLeaveRequest(int id)
+        {
+            EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
+
+            var res = await ELTM.DeleteLeaveRequestAsync(id);
+            //return RedirectToAction("ApplyLeave");
+            return Json(new { result = res });
+        }
+
     }
 }

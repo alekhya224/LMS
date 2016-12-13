@@ -23,10 +23,10 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
         }
 
         // GET api/values/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         public List<EmployeeLeaveTransactionModel> Get(int leaveType, string fromDate, string toDate, string comments, int workingDays)
         {
@@ -39,5 +39,30 @@ namespace EmployeeLeaveManagementWebAPI.Controllers
             }
             return res;
         }
+
+        public List<EmployeeLeaveTransactionModel> Get(int id)
+        {
+            EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
+            var detailsInserted = ELTM.SubmitLeaveForApproval(id);
+            var res = new List<EmployeeLeaveTransactionModel>();
+            if (detailsInserted)
+            {
+                res = ELTM.GetEmployeeLeaveTransaction();
+            }
+            return res;
+        }
+
+        public List<EmployeeLeaveTransactionModel> Get(int leaveId,int employeeId)
+        {
+            EmployeeLeaveTransactionManagement ELTM = new EmployeeLeaveTransactionManagement();
+            var detailsInserted = ELTM.DeleteLeaveRequest(leaveId);
+            var res = new List<EmployeeLeaveTransactionModel>();
+            if (detailsInserted)
+            {
+                res = ELTM.GetEmployeeLeaveTransaction();
+            }
+            return res;
+        }
+
     }
 }

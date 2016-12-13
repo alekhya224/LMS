@@ -11,5 +11,9 @@ namespace LMS_WebAPI_DAL.Repositories.Interfaces
     {
         List<string> GetLeaveType();
         bool InsertEmployeeLeaveDetails(int leaveType, string fromDate, string toDate, string comments, int workingDays);
+
+        bool SubmitLeaveForApproval(int id);
+
+        bool DeleteLeaveRequest(int id);
     }
 }

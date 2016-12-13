@@ -66,5 +66,19 @@ namespace LMS_WebAPI_ServiceHelpers
 
             return insertEmployeeDetails;
         }
+
+        public bool SubmitLeaveForApproval(int id)
+        {
+            var submitLeaveForApprovalDetails = addLeaveRepository.SubmitLeaveForApproval(id);
+
+            return submitLeaveForApprovalDetails;
+        }
+
+        public bool DeleteLeaveRequest(int id)
+        {
+            var submitLeaveForApprovalDetails = addLeaveRepository.DeleteLeaveRequest(id);
+
+            return submitLeaveForApprovalDetails;
+        }
     }
 }
