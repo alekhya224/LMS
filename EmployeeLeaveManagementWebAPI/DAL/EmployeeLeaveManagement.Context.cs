@@ -36,5 +36,6 @@ namespace LMS_WebAPI_DAL
         public virtual DbSet<MasterDataValue> MasterDataValues { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }
         public virtual DbSet<Workflow> Workflows { get; set; }
+        public virtual DbSet<Announcement> Announcements { get; set; }
     }
 }

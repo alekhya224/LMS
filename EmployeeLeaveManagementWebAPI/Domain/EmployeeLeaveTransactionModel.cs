@@ -16,8 +16,12 @@ namespace LMS_WebAPI_Domain
         public int RefStatus { get; set; }
         public int NumberOfWorkingDays { get; set; }
         public int RefLeaveType { get; set; }
+
+        public string LeaveType { get; set; }
         public string EmployeeComment { get; set; }
         public string ManagerComments { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+
+
     }
 }

@@ -32,8 +32,8 @@ namespace EmployeeLeaveManagementApp.Controllers
 
                 if (null == Session[Constants.SESSION_OBJ_USER])
                 {
-                    var encryptedPassword = CommonMethods.EncryptDataForLogins(model.UserName, model.Password);
-                    var data = await user.GetUserAsync(model.UserName, encryptedPassword);
+                   // var encryptedPassword = CommonMethods.EncryptDataForLogins(model.UserName, model.Password);
+                    var data = await user.GetUserAsync(model.UserName, model.Password);
                     if (null != data && data.RefEmployeeId !=0)
                     {
                         // var dataemp = await user.GetUserDetaiilsAsync(data.RefEmployeeId);
@@ -96,6 +96,7 @@ namespace EmployeeLeaveManagementApp.Controllers
             {
                 var data = (UserAccount)Session[Constants.SESSION_OBJ_USER];
                 EmployeeDetailsModel datares = await user.GetUserDetailsAsync(data.RefEmployeeId);
+                
                 Models.LoginModel model = new Models.LoginModel();
                 model.EmpName = data.UserName;
                 model.UserName = data.UserName;
@@ -106,6 +107,16 @@ namespace EmployeeLeaveManagementApp.Controllers
                 model.TotalLeft = Convert.ToInt16(datares.TotalLeaveCount - datares.TotalCountTaken);
                 model.DateOfJoining = DateTime.Now;
                 model.RoleName = datares.RoleName;
+                model.Announcements = new List<Models.Announcement>();
+                foreach (var item in datares.Announcements)
+                {
+                    Models.Announcement announceItem = new Models.Announcement();
+                    announceItem.ImagePath = item.ImagePath;
+                    announceItem.CarouselContent = item.CarouselContent;
+                    announceItem.Title = item.Title;
+                    model.Announcements.Add(announceItem);
+                }
+                // model.Announcements = (Models.Announcement)datares.Announcements;
                 return View(model);
             }
             return View("Login");

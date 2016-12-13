@@ -3,6 +3,7 @@ using System.Linq;
 using LMS_WebAPI_Utils;
 using LMS_WebAPI_DAL;
 using System;
+using System.Collections.Generic;
 
 namespace LMS_WebAPI_DAL.Repositories
 {
@@ -68,6 +69,24 @@ namespace LMS_WebAPI_DAL.Repositories
                     else
                         return null;
                 }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public List<Announcement> GetAnnouncements()
+        {
+            try
+            {
+                using (var ctx = new LeaveManagementSystemEntities1())
+                {
+                    var announcements = ctx.Announcements.Where(x => x.IsActive == true).ToList();
+                   
+                        return announcements;
+                    }
             }
             catch (Exception ex)
             {

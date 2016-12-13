@@ -37,19 +37,20 @@
     <![endif]-->
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
     <!-- Content Wrapper. Contains page content -->
     <!-- Main content -->
     <section class="content-header" style="height:41px">
-        <h1 class="col-md-9">
-            Leave
-            <small>apply leave</small>
+        <h1 class="col-md-9" style="padding-left:0px">
+            Leave Details
         </h1>
-        <div style="float:right" class="col-md-3">
-            <button type="button" id="btnaddleave" class="btn btn-block btn-primary">Add Leave <i class="fa fa-plus"></i></button>
-
+        <div style="float:right;padding-right:0px" class="col-md-2">
+            <button type="button" id="btnaddleave" class="btn btn-block bg-black" data-toggle="modal" data-target=".bs-add-leave-modal" style="background-color:#222d32 !important"><i class="fa fa-plus"></i>&nbsp; Add Leave </button>
+            
         </div>
     </section>
 
@@ -101,10 +102,8 @@
         </div>
         <!-- /.row -->
     </section>
-    <div id="AddLeave"></div>
-    <div class="example-modal">
-        <div class="modal" id="AddLeaveModal">
-            <div class="modal-dialog">
+        <div class="modal bs-add-leave-modal" id="AddLeaveModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -112,53 +111,74 @@
                         </button>
                         <h4 class="modal-title">Add Leave</h4>
                     </div>
-                    <div class="modal-body" style="height:250px">
-                        <div class="form-group">
-                            <div class="col-md-12">
+                    <div class="modal-body">
+                        <div class="form-group" style="padding-bottom:20px">
+
+                            <div>
                                 <label>Leave Type</label>
                             </div>
+                            <span class="form-group has-error" style="display:none" id="divLeaveTypeError">
+                                <label class="control-label" for="inputError">
+                                    <i class="fa fa-times-circle-o"></i> Please select leave type
+                                </label>
+                            </span>
 
-                            <div class="col-md-12">
+                            <div>
                                 @foreach (var value in Enum.GetValues(typeof(LMS_WebAPP_Utils.LeaveType)))
                                 {
                                     <div class="col-md-6">
-                                        <input type="radio" name="r1" class="flat-red" value="@Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)">@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)))
+                                        <input type="radio" name="r1" class="flat-red" value="@Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)">&nbsp; @(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)Convert.ToInt16((LMS_WebAPP_Utils.LeaveType)value)))
                                     </div>
                                 }
 
                             </div>
-
-                            <div class="col-md-12">
+                        </div>
+                        <div class="form-group">
+                            <div>
                                 <label>Date range:</label>
                             </div>
 
-                            <div class="input-group" style="padding-left:12px;padding-right:16px">
+                            <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input type="text" class="form-control pull-right" id="leaveDatepicker">
                             </div>
 
-                            <div class="col-md-12">
+
+                            <div class="form-group has-error" style="display:none" id="divDatePickerError">
+                                <label class="control-label" for="inputError">
+                                    <i class="fa fa-times-circle-o"></i> Please select a valid date range.
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
                                 <label>Number Of Working Days:</label>
                                 <span id="lblTotalWorkingDays"></span>
                             </div>
-
-                            <div class="col-md-12">
+</div>
+                        <div class="form-group">
+                            <div>
                                 <label>Leave Comments:</label>
-                            </div>
-                            <div class="col-md-12">
-                                <textarea id="leaveComment" rows="3" style="width:539px" placeholder="Enter ..."></textarea>
                             </div>
 
                             <div>
-                                
+                                <textarea id="leaveComment" rows="3" style="width:568px" placeholder="Enter ..."></textarea>
+                            </div>
+                            <div class="form-group has-error" style="display:none" id="divCommentError">
+                                <label class="control-label" for="leaveComment">
+                                    <i class="fa fa-times-circle-o"></i> Please enter the comments
+                                </label>
+
+                            </div>
+
                             </div>
                         </div>
-                    </div>
 
                                         <div class="modal-footer">
-           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+           <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data->Cancel</button>
                 <button type="button" id="btnLeaveRequestSubmit" class="btn btn-primary">Submit</button>
         </div>
                 </div>
@@ -167,37 +187,8 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-    </div>
-    @*<div id="dialog" style="display: none" align="center">
-            <section class="content">
-                <div class="example-modal">
-                    <div class="modal modal-primary">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="modal-title">Add Leave</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>One fine body&hellip;</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-outline">Save</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- /.modal -->
-                </div>
-                <!-- /.example-modal -->
-
-            </section>
-        </div>*@
+  
+             
     <!-- /.content -->
     <!-- ./wrapper -->
     <!-- jQuery 2.2.3 -->
@@ -241,6 +232,31 @@
                     {
                         minDate: new Date()
                     });
+                $('#leaveDatepicker').on('change.daterangepicker', function (ev, picker) {
+                    var date = ev.target.value;
+                    var dates=[];
+                    dates=date.split('-');
+                    var start = dates[0].trim();
+                    var startDate = new Date(start);
+                    var startMonth = startDate.getMonth() + 1;
+                    fromDate = startDate.getFullYear()+"-"+startMonth+"-"+startDate.getDate();
+                    var end = dates[1].trim();
+                    var endDate = new Date(end);
+                    var endMonth = endDate.getMonth() + 1;
+                    toDate = endDate.getFullYear() + "-" + endMonth+ "-" + endDate.getDate();
+                    //toDate = end.toString("YYYY-MM-DD");
+                    var days = (endDate - startDate) / (1000 * 60 * 60 * 24);
+                    days += 1;
+                    var weekend_count = 0;
+                    for (i = startDate.valueOf() ; i <= endDate.valueOf() ; i += 86400000) {
+                        var temp = new Date(i);
+                        if (temp.getDay() == 0 || temp.getDay() == 6) {
+                            weekend_count++;
+                        }
+                    }
+                    days = days - weekend_count;
+                    $("#lblTotalWorkingDays").html(Math.round(days));
+                });
                 $('#leaveDatepicker').on('apply.daterangepicker', function (ev, picker) {
 
                     var start = picker.startDate;
@@ -260,33 +276,53 @@
                     $("#lblTotalWorkingDays").html(Math.round(days));
                 });
             });
+            $('#AddLeaveModal').on('hidden.bs.modal', function () {
+                $(this).find("textarea#leaveComment").val('').end();
+                //$("#leaveDatepicker").daterangepicker("destroy");
+                //$("#leaveDatepicker").daterangepicker("refresh");
+                $(this).find("input.flat-red:checked").parent().removeClass('checked');
+                $("#divCommentError").hide();
+                $("#divLeaveTypeError").hide();
+                $.daterangepicker._clearDate
 
-
-            $('#btnaddleave').on('click', function () {
-
-                $('#AddLeaveModal').modal('show');
             });
         });
 
         $("#btnLeaveRequestSubmit").on('click', function () {
-           
-            var comments = $("#leaveComment").val();
-            fromDate = fromDate;
-            toDate = toDate;
-            var leaveType = $('input[name=r1]:checked').val();
-            var workingDays = $("#lblTotalWorkingDays").html();
-            $.ajax({
-                cache: false,
-                type: 'post',
-                url: '/ApplyLeave/SubmitLeaveRequest',
-                data: { leaveType: leaveType, fromDate: fromDate, toDate: toDate, comments: comments, workingDays: workingDays },
-                //contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    $('#AddLeaveModal').modal('hide');
-                    location.reload();
-                }
-            });
+            $("#divCommentError").hide();
+            $("#divLeaveTypeError").hide();
+            if ($("#leaveComment").val() == "" && $('input[name=r1]:checked').val() == undefined) {
+                $("#divCommentError").show();
+                $("#divLeaveTypeError").show();
+            }
+            else if ($("#leaveComment").val() == "") {
+                $("#divCommentError").show();
+            }
+            else if ($('input[name=r1]:checked').val() == undefined) {
+                $("#divLeaveTypeError").show();
+            }
+
+            else {
+                $("#divCommentError").hide();
+                $("#divLeaveTypeError").hide();
+                var comments = $("#leaveComment").val();
+                fromDate = fromDate;
+                toDate = toDate;
+                var leaveType = $('input[name=r1]:checked').val();
+                var workingDays = $("#lblTotalWorkingDays").html();
+                $.ajax({
+                    cache: false,
+                    type: 'post',
+                    url: '/ApplyLeave/SubmitLeaveRequest',
+                    data: { leaveType: leaveType, fromDate: fromDate, toDate: toDate, comments: comments, workingDays: workingDays },
+                    //contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $('#AddLeaveModal').modal('hide');
+                        location.reload();
+                    }
+                });
+            }
         }
         );
         $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({

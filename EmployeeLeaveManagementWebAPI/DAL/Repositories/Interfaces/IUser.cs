@@ -13,5 +13,7 @@ namespace LMS_WebAPI_DAL.Repositories.Interfaces
 
         EmployeeCommon GetUserDetails(int UserEmpId);
 
+        List<Announcement> GetAnnouncements();
+
     }
 }

@@ -19,8 +19,8 @@ namespace LMS_WebAPP_Utils
     public enum LeaveStatus
     {
 
-        [Description("Added")]
-        Added = 9,
+        [Description("Planned")]
+        Planned = 9,
         [Description("Submitted")]
         Submitted = 10,
         [Description("Rejected")]

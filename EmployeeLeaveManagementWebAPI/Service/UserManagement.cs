@@ -41,7 +41,17 @@ namespace LMS_WebAPI_ServiceHelpers
             try
             {
                 var userData = user.GetUserDetails(EmpId);
+                var announcements = user.GetAnnouncements();
                 var VerifiedUser = new EmployeeDetailsModel();
+               foreach(var item in announcements)
+                {
+                    LMS_WebAPI_Domain.Announcement announceItem = new LMS_WebAPI_Domain.Announcement();
+                    announceItem.ImagePath = item.ImagePath;
+                    announceItem.CarouselContent = item.CarouselContent;
+                    announceItem.Title = item.Title;
+                    announceItem.Id = item.Id;
+                    VerifiedUser.Announcements.Add(announceItem);
+                }
                 if (null != userData)
                 {
                     VerifiedUser.RoleName = userData.RoleName;

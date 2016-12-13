@@ -33,7 +33,11 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
         <!-- Content Wrapper. Contains page content -->
-        <h2>Leave Transaction</h2>
+    <section class="content-header" style="height:41px">
+        <h1 class="col-md-9" style="padding-left:0px">
+            Leave History
+        </h1>
+    </section>
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -59,9 +63,9 @@
                                                 <td>@m.FromDate.Date.ToString("dd/MM/yyyy")</td>
                                                 <td>@m.ToDate.Date.ToString("dd/MM/yyyy")</td>
                                                 <td>@m.CreatedDate.Date.ToString("dd/MM/yyyy")</td>
-                                                <td>@m.RefStatus</td>
+                                                <td>@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveStatus)m.RefStatus))</td>
                                                 <td>@m.NumberOfWorkingDays</td>
-                                                <td>@m.RefLeaveType</td>
+                                                <td>@(LMS_WebAPP_Utils.CommonMethods.Description((LMS_WebAPP_Utils.LeaveType)m.RefLeaveType))</td>
                                             </tr>
 
 
